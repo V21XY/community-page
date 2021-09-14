@@ -7,6 +7,7 @@ import store from './store'
 import axios from 'axios'
 import './assets/css/reset.css'
 
+
 Vue.use(ElementUI);
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
