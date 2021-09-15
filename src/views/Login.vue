@@ -15,7 +15,7 @@
             </div>
             <div>
               <h5>用户名</h5>
-              <input type="text" class="input" id="username" />
+              <input type="text" class="input" v-model="username" />
             </div>
           </div>
           <div class="input-group">
@@ -24,7 +24,7 @@
             </div>
             <div>
               <h5>密码</h5>
-              <input type="password" class="input" id="password" />
+              <input type="password" class="input" v-model="password" />
             </div>
           </div>
           <a href="signup">Sign UP</a>
@@ -49,6 +49,13 @@ import axios from "axios";
 
 export default {
   name: "Login",
+  data: function() {
+    return {
+      username: "",
+      password: "",
+    };
+  },
+  //在挂载完成时调用js文件控制样式
   mounted: function() {
     this.$nextTick(function() {
       const inputs = document.querySelectorAll(".input");
@@ -70,21 +77,21 @@ export default {
       });
     });
   },
+
   methods: {
+    //获取前端数据通过axios发送给服务器
     submit: function() {
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      if (username === "" || password === "") {
-        alert("用户名和密码不能为空");
+      if (this.username === "" || this.password === "") {
+        alert("用户名或密码不能为空");
       } else {
         axios
           .post("http://localhost:3000/login", {
-            username: username,
-            password: password,
+            username: this.username,
+            password: this.password,
           })
           .then(function(res) {
             if (res.data.flag) {
-              location.href = "../";
+              location.href = "../home";
             } else {
               alert(res.data.msg);
             }
