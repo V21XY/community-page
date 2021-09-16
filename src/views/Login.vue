@@ -38,6 +38,7 @@
         </form>
       </div>
     </div>
+    <button @click="get()">21</button>
   </div>
 </template>
 
@@ -46,9 +47,11 @@ import "@/assets/css/iconfont.css";
 import "@/assets/css/style.css";
 
 import axios from "axios";
+import jsCookie from 'js-cookie'
 
 export default {
   name: "Login",
+  
   data: function() {
     return {
       username: "",
@@ -79,24 +82,11 @@ export default {
   },
 
   methods: {
-    //获取前端数据通过axios发送给服务器
-    // submit: function() {
-    //   axios.post('/api/login', {
-    //       username: this.username,
-    //       password: this.password,
-    //     })
-    //     .then(function(res) {
-    //       if (res.data.flag) {
-    //         location.href = "";
-            
-    //       } else {
-    //         alert(res.data.msg);
-    //       }
-    //     })
-    //     .catch(function(error) {
-    //       console.log(error);
-    //     });
-    //},
+    get(){
+// 不传值 即 获得所有 cookie 的值
+console.log(jsCookie.get('id'))
+// retuen { name1: 'value1', name2: 'value2', ...}
+    },
     submit:function(){
       axios.post('/api/login', {
           username: this.username,

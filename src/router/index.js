@@ -4,15 +4,24 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import Test from '../views/Test.vue'
+import NotFound from '../views/NotFound.vue'
+import Cookies from 'js-cookie'
 
 Vue.use(VueRouter)
-
+function getToken() {
+  return Cookies.get('id')
+}
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/not-found',
+    name: 'NotFound',
+    component: NotFound
   },
   {
     path: '/test',
@@ -28,7 +37,8 @@ const routes = [
     path: '/signup',
     name: 'Signup',
     component:Signup
-  }
+  },
+  { path: '*', redirect: '/not-found', hidden: true }
   // {
   //   path: '/about',
   //   name: 'About',
@@ -48,7 +58,7 @@ const router = new VueRouter({
 const whiteList = ['/', '/signup','/login']
 
 router.beforeEach(async (to, from, next) => {
-  if (true) {
+  if (getToken()) {
     if (to.path === '/login') {
       next({ path:from.path })
     } else {
