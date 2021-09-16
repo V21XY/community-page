@@ -80,22 +80,36 @@ export default {
 
   methods: {
     //获取前端数据通过axios发送给服务器
-    submit: function() {
+    // submit: function() {
+    //   axios.post('/api/login', {
+    //       username: this.username,
+    //       password: this.password,
+    //     })
+    //     .then(function(res) {
+    //       if (res.data.flag) {
+    //         location.href = "";
+            
+    //       } else {
+    //         alert(res.data.msg);
+    //       }
+    //     })
+    //     .catch(function(error) {
+    //       console.log(error);
+    //     });
+    //},
+    submit:function(){
       axios.post('/api/login', {
           username: this.username,
           password: this.password,
-        })
-        .then(function(res) {
-          if (res.data.flag) {
-            location.href = "/";
-            console.log(res.data)
-          } else {
-            alert(res.data.msg);
+        }).then((res)=>{
+          if(res.data.flag){
+            location.href="../"
+          }else{
+            alert(res.data.msg)
           }
+        }).catch((err)=>{
+          console.log(err)
         })
-        .catch(function(error) {
-          console.log(error);
-        });
     },
   },
 };

@@ -15,7 +15,7 @@
             </div>
             <div>
               <h5>用户名</h5>
-              <input type="text" class="input" id="username" />
+              <input type="text" class="input" v-model="username" />
             </div>
           </div>
 
@@ -25,7 +25,7 @@
             </div>
             <div>
               <h5>密码</h5>
-              <input type="password" class="input" id="password" />
+              <input type="password" class="input" v-model="password" />
             </div>
           </div>
 
@@ -35,7 +35,7 @@
             </div>
             <div>
               <h5>角色</h5>
-              <input type="text" class="input" id="role"/>
+              <input type="text" class="input" v-model="role"/>
             </div>
           </div>
 
@@ -45,7 +45,7 @@
             </div>
             <div>
               <h5>手机号码</h5>
-              <input type="text" class="input" id="tel" />
+              <input type="text" class="input" v-model="tel" />
             </div>
           </div>
 
@@ -70,6 +70,14 @@ import axios from "axios";
 
 export default {
   name: "Signup",
+  data: function() {
+    return {
+      username: "",
+      password: "",
+      role:"",
+      tel:""
+    };
+  },
   mounted: function() {
     this.$nextTick(function() {
       const inputs = document.querySelectorAll(".input");
@@ -93,19 +101,11 @@ export default {
   },
   methods: {
     submit: function() {
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      const role = document.getElementById("role").value;
-      const tel = document.getElementById("tel").value;
-      if (username === "" || password === "" || role === "" || tel === "") {
-        alert("请把信息填写完整~");
-      } else {
-        axios
-          .post("http://localhost:3000/signup", {
-            username: username,
-            password: password,
-            role: role,
-            tel: tel,
+        axios.post("/api/signup", {
+            username: this.username,
+            password: this.password,
+            role: this.role,
+            tel:this.tel,
           })
           .then(function(res) {
             if (res.data.flag) {
@@ -119,7 +119,6 @@ export default {
           });
       }
     },
-  },
 };
 </script>
 

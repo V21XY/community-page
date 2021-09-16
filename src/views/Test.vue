@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h1>Welcome {{ username }}</h1>
+    <h1>TEST Welcome {{ username }}</h1>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 export default {
-  name: "Home",
+  name: "Test",
   data: function() {
     return {
       username: "",
