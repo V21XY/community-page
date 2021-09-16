@@ -81,25 +81,21 @@ export default {
   methods: {
     //获取前端数据通过axios发送给服务器
     submit: function() {
-      if (this.username === "" || this.password === "") {
-        alert("用户名或密码不能为空");
-      } else {
-        axios
-          .post("http://localhost:3000/login", {
-            username: this.username,
-            password: this.password,
-          })
-          .then(function(res) {
-            if (res.data.flag) {
-              location.href = "../home";
-            } else {
-              alert(res.data.msg);
-            }
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-      }
+      axios.post('/api/login', {
+          username: this.username,
+          password: this.password,
+        })
+        .then(function(res) {
+          if (res.data.flag) {
+            location.href = "/";
+            console.log(res.data)
+          } else {
+            alert(res.data.msg);
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
   },
 };

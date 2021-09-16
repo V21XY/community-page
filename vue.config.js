@@ -1,14 +1,14 @@
 module.exports={
-    devServer:{
-        proxy:{
-            '/api':{
-                target:'http://localhost:3000',
-                pathRewrite:{
-                    '^/api':'/users'
-                }
-            }
-        },
-        host:'0.0.0.0',
-        disableHostCheck:true
+        devServer:{
+            proxy:{
+               '/api':{
+                   target:'http://localhost:3000',
+                   pathRewrite:{
+                       '^/api':'/users'
+                   }
+               }
+            },
+            host:'0.0.0.0',
+            disableHostCheck:true
+        }
     }
-}
