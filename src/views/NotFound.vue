@@ -84,7 +84,7 @@ $nunito-font: 'Nunito', sans-serif;
     transform: translateY(0px);
   }
   65% {
-    transform: translateY(15px);
+    transform: translateY(50px);
   }
   to {
     transform: translateY(-0px);
@@ -95,7 +95,7 @@ $nunito-font: 'Nunito', sans-serif;
   height: 100vh;
   width: 100vw;
   background-image: url("https://assets.codepen.io/1538474/star.svg"),
-    linear-gradient(to bottom, #05007a, #4d007d);
+    linear-gradient(to bottom, #1712a5, #290768);
 }
 .mars {
   left: 0;

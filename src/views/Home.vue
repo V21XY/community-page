@@ -1,17 +1,23 @@
 <template>
   <div>
-    <h1>Welcome {{ username }}</h1>
+  
+  <UnLoginHeader msg="我是周志贤"></UnLoginHeader>
+
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import UnLoginHeader from "../components/UnLoginHeader.vue"
 export default {
   name: "Home",
   data: function() {
     return {
       username: "",
     };
+  },
+  components:{
+    UnLoginHeader
   },
   mounted: function() {
     this.$nextTick(function() {
