@@ -1,228 +1,153 @@
 <template>
- <div>
- <div class="not-found parallax">
-            <div class="sky-bg"></div>
-            <div class="wave-7"></div>
-            <div class="wave-6"></div>
-            <a class="wave-island" href="#">
-                    <img src="http://res.cloudinary.com/andrewhani/image/upload/v1524501929/404/island.svg" alt="Island">
-                </a>
-            <div class="wave-5"></div>
-            <div class="wave-lost wrp">
-                <span>4</span>
-                <span>0</span>
-                <span>4</span>
-            </div>
-            <div class="wave-4"></div>
-            <div class="wave-boat">
-                <img class="boat" src="http://res.cloudinary.com/andrewhani/image/upload/v1524501894/404/boat.svg" alt="Boat">
-            </div>
-            <div class="wave-3"></div>
-            <div class="wave-2"></div>
-            <div class="wave-1"></div>
-            <div class="wave-message">
-                <p>Your're lost</p>
-                <p>Click on the island to return</p>
-            </div>
-        </div>
- </div>
+  <div class="bg">
+   
+    <div class="mars"></div>
+     <div class="button-back">
+      	<a class="btn-back" href="#" >跟我回到首页    </a>
+    </div>
+    <img src="https://assets.codepen.io/1538474/404.svg" class="logo-404" />
+    <img src="https://assets.codepen.io/1538474/meteor.svg" class="meteor" />
+
+
+
+    <img
+      src="https://assets.codepen.io/1538474/astronaut.svg"
+      class="astronaut"
+    />
+    <img
+      src="https://assets.codepen.io/1538474/spaceship.svg"
+      class="spaceship"
+    />
+  </div>
 </template>
 
 <script>
-import '@/assets/css/reset.css'
 export default {
-  
-  name: 'NotFound',
-  methods: {
-   
+  name: "NotFound",
+  data: function() {
+    return {
+     
+    };
   },
-   //在挂载完成时调用js文件控制样式
- created: function() {
-  
+  mounted: function() {
+    this.$nextTick(function() {
+    
+    });
   },
-}
+  methods: {},
+};
 </script>
-
 <style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,600,700');
+$nunito-font: 'Nunito', sans-serif;
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans+Narrow');
-$in-out-cubic: cubic-bezier(0.65, 0.05, 0.36, 1);
-@mixin transform($transform...) {
-    -webkit-transform: $transform;
-    -moz-transform: $transform;
-    -ms-transform: $transform;
-    -o-transform: $transform;
-    transform: $transform;
-}
-@mixin transform-origin($transform-origin...) {
-    -webkit-transform-origin: $transform-origin;
-    -moz-transform-origin: $transform-origin;
-    -ms-transform-origin: $transform-origin;
-    -o-transform-origin: $transform-origin;
-    transform-origin: $transform-origin;
-}
-@mixin key-frame($name) {
-    @-webkit-keyframes #{$name} {
-        @content;
+// mixins
+@mixin breakpoint($point) {
+  @if $point==mobile {
+    @media (max-width: 480px) and (min-width: 320px) {
+      @content;
     }
-    @-moz-keyframes #{$name} {
-        @content;
-    }
-    @-o-keyframes #{$name} {
-        @content;
-    }
-    /* Standard syntax */
-    @keyframes #{$name} {
-        @content;
-    }
-}
-@mixin animation($animation...) {
-    -webkit-animation: $animation;
-    -moz-animation: $animation;
-    -o-animation: $animation;
-    animation: $animation;
-}
-@mixin animation-delay($animation...) {
-    -webkit-animation-delay: $animation;
-    -moz-animation-delay: $animation;
-    -o-animation-delay: $animation;
-    animation-delay: $animation;
-}
-body{
-  overflow:hidden;
-  font-family: 'Open Sans', sans-serif;
-}
-.not-found {
-    position: relative;
-    overflow: hidden;
-    margin:0 -20vw;
-    height:100vh;
-    [class*="wave"] {
-        position: absolute;
-    }
-    div {
-        position: absolute;
-        width: 100%;
-        bottom: 0;
-        left: 0;
-        @for $i from 1 through 7 {
-            &.wave-#{$i} {
-                background: url(http://res.cloudinary.com/andrewhani/image/upload/v1524501869/404/wave-#{$i}.svg);
-            }
-        }
-      &.sky-bg{
-        background: url(http://res.cloudinary.com/andrewhani/image/upload/v1524821915/404/bg-1_gvybzk.svg);
-        height: 100%;
-      }
-        &[class*="wave"]:not(.wave-4) {
-            height: calc(100% - 250px);
-        }
-        &.wave-4 {
-            height: calc(100% - 430px);
-        }
-    }
-    .boat {
-        position: absolute;
-        top: 0;
-        right: 15%;
-        width: 150px;
-        @include animation(boat 15s $in-out-cubic infinite);
-    }
-    .wave-lost {
-        position: absolute;
-        top: 20%;
-        left: 50%;
-        color: #fff;
-        font-size: 20rem;
-        @include animation(surf 2s);
-        span {
-            float: left;
-            @include animation(float 3s ease-in infinite);
-            &:nth-child(2) {
-                @include animation-delay(2.5s);
-            }
-            &:nth-child(3) {
-                @include animation-delay(4.5s);
-            }
-        }
-    }
-    .wave-island {
-        position: absolute;
-        top: 130px;
-        left: 20%;
-        padding: 10px;
-        width: 170px;
-    }
-    .wave-message {
-        position: absolute;
-        bottom: 100px;
-        left: 50%;
-        padding-right: 50%;
-        height: auto !important;
-        color: #fff;
-        font-size: 3rem;
-        text-align: left;
-        @include animation(wave-message 1s);
-    }
+  }
 }
 
-@include key-frame(boat) {
-    0% {
-        @include transform-origin(left);
-        @include transform(rotate(-15deg) translate3d(400px, 0px, 0px));
-    }
-    20% {
-        @include transform-origin(left);
-        @include transform(rotate(15deg) translate3d(-20vw, 0, 0px));
-    }
-    25% {
-        @include transform-origin(left);
-        @include transform(rotate(-7deg) translate3d(-25vw, 0, 0px));
-    }
-    50% {
-        @include transform-origin(left);
-        @include transform(rotate(5deg) translate3d(-50vw, 0, 0px));
-    }
-    60% {
-        @include transform-origin(left);
-        @include transform(rotate(-1deg) translate3d(-60vw, 0, 0px));
-    }
-    100% {
-        @include transform-origin(left);
-        @include transform(rotate(2deg) translate3d(-100vw, 0, 0px));
-    }
+.button-back{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+ 
+  width: 100vw;
+  position: absolute;
+  top: 50vh;
+}
+.btn-back{
+  border: 1px solid white;
+  color: white;
+  padding: 12px;
+  padding-top: 16px;
+  font-family: $nunito-font;
+  text-decoration: none;
+	border-radius: 5px;
+  font-weight: bold;
+  &:hover{
+    background: white;
+    color: #4D007D;
+  }
+
+  @include breakpoint(mobile){
+    font-size: 3.5vmin;
+  }
 }
 
-@include key-frame(float) {
-    0%,
-    100% {
-        @include transform(rotate(3deg) translate3d(0px, -10px, 0px));
-    }
-    50% {
-        @include transform(rotate(-3deg) translate3d(0px, 10px, 0px));
-    }
+// keyrames
+@keyframes floating {
+  from {
+    transform: translateY(0px);
+  }
+  65% {
+    transform: translateY(15px);
+  }
+  to {
+    transform: translateY(-0px);
+  }
 }
 
-@include key-frame(surf) {
-    0% {
-        @include transform-origin(right);
-        @include transform(rotate(15deg) translate3d(0, 800px, 0));
-    }
-    30% {
-        @include transform-origin(right);
-        @include transform(rotate(15deg) translate3d(0, 500px, 0));
-    }
-    100% {
-        @include transform-origin(right);
-        @include transform(rotate(0) translate3d(0, 0, 0px));
-    }
+.bg{
+  height: 100vh;
+  width: 100vw;
+  background-image: url("https://assets.codepen.io/1538474/star.svg"),
+    linear-gradient(to bottom, #05007a, #4d007d);
 }
-@include key-frame(wave-message){
-    0%{
-        @include transform(translate3d(0, 120%, 0));
-    }
-    100%{
-        @include transform(translate3d(0, 0, 0)); 
-    }
+.mars {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  height: 27vmin;
+  background: url("https://assets.codepen.io/1538474/mars.svg") no-repeat bottom
+    center;
+  background-size: cover;
+}
+
+.logo-404 {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 16vmin;
+  width: 30vmin;
+
+  @include breakpoint(mobile) {
+    top: 45vmin;
+  }
+}
+
+.meteor {
+  position: absolute;
+  right: 2vmin;
+  top: 16vmin;
+}
+
+.astronaut {
+  position: absolute;
+  top: 18vmin;
+  left: 10vmin;
+  height: 30vmin;
+  animation: floating 3s infinite ease-in-out;
+
+  @include breakpoint(mobile) {
+    top: 2vmin;
+  }
+}
+
+.spaceship {
+  position: absolute;
+  bottom: 15vmin;
+  right: 24vmin;
+
+  @include breakpoint(mobile) {
+    width: 45vmin;
+    bottom: 18vmin;
+  }
 }
 </style>
