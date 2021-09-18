@@ -38,7 +38,6 @@
         </form>
       </div>
     </div>
-    <button @click="get()">21</button>
   </div>
 </template>
 
@@ -82,11 +81,6 @@ export default {
   },
 
   methods: {
-    get(){
-// 不传值 即 获得所有 cookie 的值
-console.log(jsCookie.get('id'))
-// retuen { name1: 'value1', name2: 'value2', ...}
-    },
     submit:function(){
       axios.post('/api/login', {
           username: this.username,

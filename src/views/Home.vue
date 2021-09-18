@@ -1,7 +1,7 @@
 <template>
   <div>
   
-  <UnLoginHeader msg="我是周志贤"></UnLoginHeader>
+  <UnLoginHeader msg="这是网站未登录时的头部组件"></UnLoginHeader>
 
   </div>
 </template>

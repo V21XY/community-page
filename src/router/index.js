@@ -57,6 +57,12 @@ const router = new VueRouter({
 
 const whiteList = ['/', '/signup','/login']
 
+router.beforeEach((to, from, next) => {
+  window.document.title = '摄影社区网站';
+  next();
+});
+
+
 router.beforeEach(async (to, from, next) => {
   if (getToken()) {
     if (to.path === '/login') {
