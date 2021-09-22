@@ -5,8 +5,8 @@
 </template>
 
 <style scoped="scoped">
+@import './assets/css/reset.css' ;
 	#app{
-		width: 100vw;
-		height: 100vh;
+	
 	}
 </style>
