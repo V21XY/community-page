@@ -1,34 +1,33 @@
 <template>
   <div>
-  
-  <UnLoginHeader msg="这是网站未登录时的头部组件"></UnLoginHeader>
-
+    <UnLoginHeader v-if="username == ''"></UnLoginHeader>
+    <LoginHeader v-else username="username"></LoginHeader>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import UnLoginHeader from "../components/UnLoginHeader.vue"
+import UnLoginHeader from "../components/UnLoginHeader.vue";
+import LoginHeader from "../components/LoginHeader.vue";
 export default {
   name: "Home",
-  data: function() {
+  data: function () {
     return {
       username: "",
     };
   },
-  components:{
-    UnLoginHeader
+  components: {
+    UnLoginHeader,
+    LoginHeader,
   },
-  mounted: function() {
-    this.$nextTick(function() {
-       axios.get('/api/userInfo').then((response) => {
-       this.username=response.data.username
-  console.log(response.data.username)
-})
+  mounted: function () {
+    this.$nextTick(function () {
+      axios.get("/api/userInfo").then((response) => {
+        this.username = response.data.username;
+        console.log(response.data.username);
+      });
     });
   },
-  methods: {
-
-  },
+  methods: {},
 };
 </script>

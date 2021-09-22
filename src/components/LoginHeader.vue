@@ -19,6 +19,26 @@
         >
         </el-input>
       </el-form>
+      <div class="user">
+        <el-badge value="角色" class="item" type="primary">
+          <el-avatar
+            src="https://iconfont.alicdn.com/t/a0aaa8b0-8be5-410b-814f-a3117569c415.png"
+          ></el-avatar>
+        </el-badge>
+        <el-dropdown>
+          <h5 class="el-dropdown-link" style="margin-left: 5px">
+            {{ username }}
+          </h5>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item disabled="true" class="menu"
+              >个人信息</el-dropdown-item
+            >
+            <el-dropdown-item disabled="true" class="menu"
+              >注销</el-dropdown-item
+            >
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
       <a href="login"
         ><el-button plain round><h4>登录</h4></el-button></a
       >
@@ -32,7 +52,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "UnLoginHeader",
+  name: "LoginHeader",
   data: function () {
     return {
       userInfo: [],
