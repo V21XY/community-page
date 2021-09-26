@@ -1,7 +1,7 @@
 <template>
   <div>
     <UnLoginHeader v-if="username == ''"></UnLoginHeader>
-    <LoginHeader v-else username="username"></LoginHeader>
+    <LoginHeader v-else></LoginHeader>
   </div>
 </template>
 
@@ -24,7 +24,6 @@ export default {
     this.$nextTick(function () {
       axios.get("/api/userInfo").then((response) => {
         this.username = response.data.username;
-        console.log(response.data.username);
       });
     });
   },

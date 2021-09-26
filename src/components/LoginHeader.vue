@@ -22,12 +22,12 @@
       <div class="user">
         <el-badge value="角色" class="item" type="primary">
           <el-avatar
-            src="https://iconfont.alicdn.com/t/a0aaa8b0-8be5-410b-814f-a3117569c415.png"
+            :src="userInfo.avatar"
           ></el-avatar>
         </el-badge>
         <el-dropdown>
           <h5 class="el-dropdown-link" style="margin-left: 5px">
-            {{ username }}
+            {{ userInfo.username }}
           </h5>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item disabled="true" class="menu"
@@ -55,32 +55,18 @@ export default {
   name: "LoginHeader",
   data: function () {
     return {
-      userInfo: [],
-      search: "",
-      user: [],
-      action: [],
+      userInfo: {},
     };
   },
   methods: {
     getUserInfo: function () {
-      axios.get("users/index").then((response) => {
+      axios.get("/api/userInfo").then((response) => {
         let res = response.data;
-        this.userInfo = res;
-        console.log(this.userInfo);
+      this.userInfo=res[0]
+      console.log(this.userInfo)
       });
     },
-    onSubmit: function () {
-      axios
-        .post("users/search", {
-          search: this.search,
-        })
-        .then((response) => {
-          let res = response.data;
-          this.user = res.user;
-          this.action = res.action;
-          location.href = "../search";
-        });
-    },
+    
   },
   mounted() {
     this.getUserInfo();
@@ -124,7 +110,6 @@ ul li {
   margin-top: 30px;
   font-size: 1rem;
   color: #9d9d9d;
-  font-family: KaiTi_GB2312;
 }
 .nav > a > li:hover {
   color: #006aff;
@@ -133,6 +118,10 @@ ul li {
 .left {
   width: 60%;
   margin-left: 5%;
+}
+
+.user{
+  margin-left:30px
 }
 
 a:hover {

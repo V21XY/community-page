@@ -104,7 +104,6 @@ ul li {
   margin-top: 30px;
   font-size: 1rem;
   color: #9d9d9d;
-  font-family: KaiTi_GB2312;
 }
 .nav > a > li:hover {
   color: #006aff;
