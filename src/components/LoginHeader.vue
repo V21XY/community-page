@@ -21,21 +21,17 @@
       </el-form>
       <div class="user">
         <el-badge :value="userInfo.role" class="item" type="primary">
-          <el-avatar
-            :src="userInfo.avatar"
-          ></el-avatar>
+          <el-avatar :src="userInfo.avatar"></el-avatar>
         </el-badge>
         <el-dropdown>
           <h5 class="el-dropdown-link" style="margin-left: 5px">
             {{ userInfo.username }}
           </h5>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item disabled="true" class="menu"
-              >个人信息</el-dropdown-item
-            >
-            <el-dropdown-item disabled="true" class="menu"
-              >注销</el-dropdown-item
-            >
+            <el-dropdown-item class="menu">个人信息</el-dropdown-item>
+            <el-dropdown-item class="menu">
+              <p @click="logout">注销</p>
+            </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -51,6 +47,7 @@
 
 <script>
 import axios from "axios";
+import Cookies from "js-cookie";
 export default {
   name: "LoginHeader",
   data: function () {
@@ -62,11 +59,15 @@ export default {
     getUserInfo: function () {
       axios.get("/api/userInfo").then((response) => {
         let res = response.data;
-      this.userInfo=res[0]
-      console.log(this.userInfo)
+        this.userInfo = res[0];
+        console.log(this.userInfo);
       });
     },
-    
+    logout: function () {
+      console.log("注销");
+      Cookies.remove("id");
+      location.reload();
+    },
   },
   mounted() {
     this.getUserInfo();
@@ -120,8 +121,8 @@ ul li {
   margin-left: 5%;
 }
 
-.user{
-  margin-left:30px
+.user {
+  margin-left: 30px;
 }
 
 a:hover {
