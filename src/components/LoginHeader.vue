@@ -20,7 +20,7 @@
         </el-input>
       </el-form>
       <div class="user">
-        <el-badge value="角色" class="item" type="primary">
+        <el-badge :value="userInfo.role" class="item" type="primary">
           <el-avatar
             :src="userInfo.avatar"
           ></el-avatar>

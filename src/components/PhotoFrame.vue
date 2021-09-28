@@ -1,7 +1,7 @@
 <template>
   <div class="photo">
     <img
-      src="https://img.zcool.cn/community/01862061502d5b11013f22cf8c3a95.jpg@520w_390h_1c_1e_2o_100sh.jpg"
+      src="https://img.zcool.cn/community/01eabb615091cb11013f22cfe7c68a.jpg@520w_390h_1c_1e_2o_100sh.jpg"
     /><a
       class="photo_link"
       href="https://500px.com.cn/community/photo-details/00d329b77c0c40d381d73d4adabef040"
@@ -18,7 +18,7 @@
             style="width:30px;height:30px"
             alt=""
           />
-          <div class="name">TheV21TheV21</div>
+          <div class="name">TheV21</div>
           <a
             class="title_link"
             href="https://www.hao123.com/"
@@ -36,7 +36,7 @@
 
 <script>
 export default {
-  name: "Test",
+  name: "PhotoFrame",
   data: function() {
     return {};
   },
@@ -47,6 +47,12 @@ export default {
 
 <style scoped lang="scss">
 
+.action .iconfont{
+    margin-left: 15px;
+    font-size: 20px;
+    opacity: 0.8;
+}
+
 a {
   text-decoration: none;
   outline: 0;
@@ -56,7 +62,6 @@ a {
   top: 0;
   left: 0;
 }
-
 
 .photo {
   top: 0px;
@@ -114,10 +119,7 @@ opacity: 0;
   -moz-transition: opacity 0.2s;
   transition: opacity 0.2s;
 }
-.info:hover .name{
-    background-color: rgba(124, 124, 124, 0.5);
-  
-}
+
 .bottom img {
   border-radius: 50%;
 }
@@ -148,12 +150,15 @@ opacity: 0;
 }
 
 .name {
-  margin-left: 5px;
+    margin-left: 3px;
   font-size: 10px;
-   padding: 8px;
+  padding: 8px;
    border-radius: 20px;
 }
 
+.info:hover .name{
+    background-color: rgba(216, 214, 214, 0.3);
+}
 .action {
     position: absolute;
   right: 20px;

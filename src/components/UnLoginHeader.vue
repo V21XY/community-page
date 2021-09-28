@@ -42,28 +42,10 @@ export default {
     };
   },
   methods: {
-    getUserInfo: function () {
-      axios.get("users/index").then((response) => {
-        let res = response.data;
-        this.userInfo = res;
-        console.log(this.userInfo);
-      });
-    },
-    onSubmit: function () {
-      axios
-        .post("users/search", {
-          search: this.search,
-        })
-        .then((response) => {
-          let res = response.data;
-          this.user = res.user;
-          this.action = res.action;
-          location.href = "../search";
-        });
-    },
+   
   },
   mounted() {
-    this.getUserInfo();
+   
   },
 };
 </script>
