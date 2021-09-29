@@ -68,7 +68,7 @@
       </div>
     </div>
     <div class="content">
-      <div class="content-discover">
+      <div class="content-discover" style="padding:0 183px">
         <h1>发现精彩图像 尽在国际化摄影社区</h1>
         <el-row>
           <el-col :span="8" v-for="o in photo" :key="o">
@@ -87,75 +87,27 @@
       </div>
       <div class="content-photo">
         <h1>与优秀摄影师共驻，交流学习成长</h1>
-        <div class="photo">
-          <div class="photo-img-item">
+        <div class="photo" >
+          <div class="photo-img-item"  v-for="(item) in hotList" :key="item.id">
             <el-avatar
               class="avatar"
-              src="https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3649178992,1821853682&fm=26&gp=0.jpg"
+              :src="item.avatar"
             ></el-avatar>
-            <p>TheV21</p>
-            <p>粉丝 ：2541个</p>
-          </div>
-          <div class="photo-img-item">
-            <el-avatar
-              class="avatar"
-              src="https://dss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1950846641,3729028697&fm=26&gp=0.jpg"
-            ></el-avatar>
-            <p>将近的晚风</p>
-            <p>粉丝 ：215个</p>
-          </div>
-          <div class="photo-img-item">
-            <el-avatar
-              class="avatar"
-              src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2456468987,3284231714&fm=26&gp=0.jpg"
-            ></el-avatar>
-            <p>Donkey</p>
-            <p>粉丝 ：2188个</p>
-          </div>
-          <div class="photo-img-item">
-            <el-avatar
-              class="avatar"
-              src="https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=708482407,3295795161&fm=26&gp=0.jpg"
-            ></el-avatar>
-            <p>DonDeng21</p>
-            <p>粉丝 ：2152个</p>
+            <p>{{item.username}}</p>
+            <p>粉丝 ：{{item.fans}}个</p>
           </div>
         </div>
       </div>
       <div class="content-model">
         <h1>通过拍摄，展示你的独特魅力</h1>
         <div class="photo">
-          <div class="photo-img-item">
+          <div class="photo-img-item"  v-for="(item) in hotList" :key="item.id">
             <el-avatar
               class="avatar"
-              src="https://img2.baidu.com/it/u=1441836571,2166773131&fm=26&fmt=auto&gp=0.jpg"
+              :src="item.avatar"
             ></el-avatar>
-            <p>勇</p>
-            <p>粉丝 ：25410个</p>
-          </div>
-          <div class="photo-img-item">
-            <el-avatar
-              class="avatar"
-              src="https://wx1.sinaimg.cn/mw2000/7e7aafd6ly8ghuxzbifkzj20e80e8dgc.jpg"
-            ></el-avatar>
-            <p>贤</p>
-            <p>粉丝 ：215个</p>
-          </div>
-          <div class="photo-img-item">
-            <el-avatar
-              class="avatar"
-              src="https://img2.baidu.com/it/u=1704219071,3761829583&fm=26&fmt=auto&gp=0.jpg"
-            ></el-avatar>
-            <p>熊</p>
-            <p>粉丝 ：21458个</p>
-          </div>
-          <div class="photo-img-item">
-            <el-avatar
-              class="avatar"
-              src="https://img1.baidu.com/it/u=3153764335,479392077&fm=26&fmt=auto&gp=0.jpg"
-            ></el-avatar>
-            <p>梨</p>
-            <p>粉丝 ：521个</p>
+            <p>{{item.username}}</p>
+            <p>粉丝 ：{{item.fans}}个</p>
           </div>
         </div>
       </div>
@@ -173,38 +125,7 @@
             href="https://u.wechat.com/EGeLxT6XKPVgLHEbDvdpOpI"
             style="align-self: center"
           >
-            <div
-              style="
-                background-color: #000000;
-                width: 180px;
-                height: 40px;
-                align-self: center;
-                border-radius: 10px;
-                margin-top: 20px;
-              "
-            >
-              <span
-                class="iconfont icon-weixin1"
-                style="
-                  color: whitesmoke;
-                  font-size: 25px;
-                  float: left;
-                  padding-top: 6px;
-                  padding-left: 10px;
-                  padding-right: 10px;
-                "
-              ></span>
-              <div
-                style="
-                  color: whitesmoke;
-                  font-size: 12px;
-                  padding-top: 15px;
-                  font-weight: bold;
-                "
-              >
-                Add Me For WeChat
-              </div>
-            </div>
+
           </a>
         </div>
       </div>
@@ -233,6 +154,7 @@ export default {
         "https://img.zcool.cn/community/01309360caa84211013f47205c1c48.jpg@1380w",
       ],
       photo: [],
+      hotList:[]
     };
   },
   components: {
@@ -249,6 +171,10 @@ export default {
       axios.get("/api/dynamic").then((response) => {
         this.photo = response.data;
         console.log("图片列表", this.photo);
+      });
+       axios.get("/api/hotList").then((response) => {
+         this.hotList=response.data
+        console.log("热门列表", response.data);
       });
     });
   },
@@ -275,7 +201,6 @@ h1 {
   background-color: #f5f5f5;
 }
 .content-about .introduce > img {
-  margin-top: 50px;
   width: 200px;
   height: 200px;
   align-self: center;
@@ -295,7 +220,7 @@ h1 {
 
 .content-about .introduce :nth-child(2) {
   font-size: 18px;
-  text-align: left;
+  text-align: left;line-height: 30px;
 }
 .content-about {
   background-color: #f5f5f5;
@@ -306,9 +231,7 @@ h1 {
 .content-model {
   background-color: #ffffff;
 }
-// .content-discover {
-//   margin-top: 80px;
-// }
+
 .photo-img-item :nth-child(2) {
   font-size: 26px;
   color: #525558;

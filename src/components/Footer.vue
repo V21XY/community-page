@@ -69,9 +69,13 @@ export default {
   display: flex;
   margin-left: 200px;
   align-items: center;
+  
 }
 .right>div{
   margin-right: 20px;
+   display: flex;
+ flex-direction: column;
+ align-items: center;
 }
 .right>div>img{
   width: 200px;

@@ -1,35 +1,58 @@
 <template>
-  <div class="photo">
-    <img
-      src="https://img.zcool.cn/community/01862061502d5b11013f22cf8c3a95.jpg@520w_390h_1c_1e_2o_100sh.jpg"
-    /><a
-      class="photo_link"
-      href="https://500px.com.cn/community/photo-details/00d329b77c0c40d381d73d4adabef040"
-      target="_blank"
-    ></a>
-    <div class="title">
-      <p>月落乌啼霜满天</p>
+  <div class="main">
+    <div class="left">
+      <div class="full_screen">
+        <i class="iconfont icon-faxian1"></i>
+      </div>
+      <div class="nav nav_left">
+        <i class="iconfont icon-faxian1"></i>
+      </div>
+      <div class="nav nav_right">
+        <i class="iconfont icon-faxian1"></i>
+      </div>
+      <div class="photo_frame">
+        <img src="../assets/img/1.png" alt="" />
+      </div>
     </div>
-    <div class="bottom">
-      <div class="footer">
-        <div class="info">
-          <img
-            src="../assets/img/鱼.png"
-            style="width:30px;height:30px"
-            alt=""
-          />
-          <div class="name">TheV21TheV21</div>
-          <a
-            class="title_link"
-            href="https://www.hao123.com/"
-            target="_blank"
-          ></a>
+    <div class="right">
+      <div class="photographer_info">
+        <div class="avatar">
+          <img src="../assets/img/鱼.png" alt="" />
         </div>
-        <div class="action">
-           <i class="iconfont icon-guanyu1"></i>
-          <i class="iconfont icon-faxian1"></i>
+        <div class="info">
+          <p>TheV21</p>
+          <el-button type="primary" size="mini" plain>关注</el-button>
         </div>
       </div>
+      <div class="actions">
+        <div class="item">
+          <i class="iconfont icon-faxian1"></i>
+          <p>210</p>
+        </div>
+        <div class="item">
+          <i class="iconfont icon-faxian1"> </i>
+          <p>210</p>
+        </div>
+        <div class="item">
+          <i class="iconfont icon-faxian1"></i>
+          <p>21</p>
+        </div>
+      </div>
+      <div class="introduce">
+        <p>Introduce</p>
+        <div class="content">
+          Our generation is different from those who raised us... Lack of
+          comprehension as to what we prefer has been an issue between family...
+          Thoughts is all we have...
+        </div>
+      </div>
+      <div class="detail">
+        详细
+      </div>
+<div class="comment">
+
+</div>
+
     </div>
   </div>
 </template>
@@ -46,155 +69,181 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
-a {
-  text-decoration: none;
-  outline: 0;
-   position: absolute;
+.detail {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  height: 60px;
+  // background-color: blue;
   width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
 }
 
-
-.photo {
-  top: 0px;
-  width: 500px;
-  left: 0px;
-  position: relative;
-}
-
-.photo img {
-  position: relative;
-  width: 100%;
-}
-
-.photo .photo_link {
-  z-index: 1;
-}
-
-.title {
+.full_screen {
+  z-index: 15;
   position: absolute;
   top: 0;
-  color: white;
-  padding: 10px;
-  width: 100%;
-  left: 0;
-  font-size: 13px;
-  background: linear-gradient(0deg, transparent 0, rgba(0, 0, 0, 0.6));
+  opacity: 0;
+  right: 0;
+  margin: 30px;
+}
+
+.photo_frame {
+  position: absolute;
+  top: 0;
+  left: 15%;
+  width: 70%;
+  padding: 131px 340px;
+  //  background-color: yellow;
+}
+
+.full_screen .iconfont {
+  font-size: 2.1rem;
+}
+
+.nav .iconfont {
+  color: rgb(214, 41, 41);
+  font-size: 2.5rem;
+  opacity: 0;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   transition: all 0.2s;
-  height: 40px;
-  opacity: 0;
 }
 
-.bottom {
+.avatar {
+  width: auto;
+  margin: 0 12px;
+}
+
+.info > p {
+  font-size: 21px;
+  color: rgb(73, 73, 73);
+  margin-bottom: 6px;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.introduce {
+  // background-color: antiquewhite;
   display: flex;
-  position: absolute;
-  bottom: 0px;
-  color: white;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
-  left: 0;
-opacity: 0;
+  height: auto;
+  padding: 20px;
+}
+
+.introduce > p {
+  font-size: 1.1em;
+  color: rgb(73, 73, 73);
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.introduce .content {
   font-size: 14px;
-  min-height: 50px;
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    from(transparent),
-    to(rgba(0, 0, 0, 0.6))
-  );
-  background: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.6));
-  background: -moz-linear-gradient(top, transparent 0, rgba(0, 0, 0, 0.6) 100%);
-  background: linear-gradient(180deg, transparent 0, rgba(0, 0, 0, 0.6));
-  -webkit-transition: opacity 0.2s;
-  -moz-transition: opacity 0.2s;
-  transition: opacity 0.2s;
+  line-height: 19px;
+  color: rgb(73, 73, 73);
+  letter-spacing: 0.5px;
 }
-.info:hover .name{
-    background-color: rgba(124, 124, 124, 0.5);
-  
+
+.main {
+  display: flex;
+  height: 100vh;
 }
-.bottom img {
+
+.photographer_info {
+  display: flex;
+  align-items: center;
+  // background-color: yellowgreen;
+  width: 100%;
+  height: 90px;
+  padding: 0 20px;
+}
+
+.photographer_info .avatar > img {
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
 }
 
-.footer {
+.left {
+  background-color: rgb(235, 235, 235);
+  width: -webkit-calc(100% - 340px);
   position: relative;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  // background-color: yellowgreen;
   width: 100%;
-  padding: 10px;
-  display: flex;
-  align-items: center;
+  height: 80px;
+  justify-content: space-around;
 }
 
-.info {
+.actions .item {
+  // background-color: royalblue;
+  color: rgb(101, 173, 236);
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.item .iconfont {
+  font-size: 26px;
+  margin: 0 15px;
+}
+
+.nav {
+  width: 15%;
+  height: 100%;
   position: absolute;
-  left: 20px;
+  top: 0;
+  // background-color: rgb(20, 103, 211);
   display: flex;
-  align-items: center;
-   opacity: 0;
-   bottom: 0;
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  transition: all 0.2s;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.info .title_link {
-   z-index: 2;
- 
+.nav_left:hover .iconfont {
+  opacity: 1;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4;
+  transition: all 0.4s;
 }
 
-.name {
-  margin-left: 5px;
-  font-size: 10px;
-   padding: 8px;
-   border-radius: 20px;
+.nav_right:hover .iconfont {
+  opacity: 1;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4;
+  transition: all 0.4s;
 }
 
-.action {
-    position: absolute;
-  right: 20px;
+.left:hover .full_screen {
+  opacity: 1;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4;
+  transition: all 0.4s;
+}
+
+.nav_left {
+  left: 0;
+}
+
+.nav_right {
+  right: 0;
+  align-items: flex-end;
+}
+
+.right {
+  width: 340px;
+  background-color: rgb(255, 255, 255);
   display: flex;
+  flex-direction: column;
   align-items: center;
-   opacity: 0;
-   bottom: 0;
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  transition: all 0.2s;
-}
-
-.photo.active .bottom,
-.photo:hover .bottom {
-  opacity: 1;
-}
-
-.photo.active .info,
-.photo:hover .info {
-  opacity: 1;
-  bottom: 10px;
-  -webkit-transition: bottom 0.2s;
-  -moz-transition: bottom 0.2s;
-  transition: bottom 0.2s;
-}
-
-.photo.active .action,
-.photo:hover .action {
-  opacity: 1;
-  bottom: 10px;
-  -webkit-transition: bottom 0.2s;
-  -moz-transition: bottom 0.2s;
-  transition: bottom 0.2s;
-}
-
-.photo.active .title,
-.photo:hover .title {
-  opacity: 1;
- top: 0px;
-  -webkit-transition: top 0.2s;
-  -moz-transition: top 0.2s;
-  transition: top 0.2s;
 }
 </style>
