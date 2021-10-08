@@ -80,7 +80,7 @@
               "
             >
               <PhotoFrame :data="o"></PhotoFrame>
-              <div></div>
+             
             </div>
           </el-col>
         </el-row>

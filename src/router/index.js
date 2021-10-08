@@ -5,6 +5,8 @@ import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import Test from '../views/Test.vue'
 import NotFound from '../views/NotFound.vue'
+import PhotoList from '../views/PhotoList.vue'
+
 import Cookies from 'js-cookie'
 
 Vue.use(VueRouter)
@@ -17,6 +19,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/list',
+    name: 'PhotoList',
+    component: PhotoList
   },
   {
     path: '/not-found',
@@ -55,7 +62,7 @@ const router = new VueRouter({
   routes
 })
 
-const whiteList = ['/', '/signup','/login']
+const whiteList = ['/', '/signup','/login','/test']
 
 router.beforeEach((to, from, next) => {
   window.document.title = '摄影社区网站';
