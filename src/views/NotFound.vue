@@ -3,7 +3,7 @@
    
     <div class="mars"></div>
      <div class="button-back">
-      	<a class="btn-back" href="#" >跟我回到首页    </a>
+      	<div class="btn-back" @click="ToIndex()">跟我回到首页    </div>
     </div>
     <img src="https://assets.codepen.io/1538474/404.svg" class="logo-404" />
     <img src="https://assets.codepen.io/1538474/meteor.svg" class="meteor" />
@@ -34,7 +34,13 @@ export default {
     
     });
   },
-  methods: {},
+  methods: {
+    ToIndex(){
+     this.$router.push({
+       path:`/`
+     })
+    }
+  },
 };
 </script>
 <style lang="scss" scoped>

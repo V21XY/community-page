@@ -6,6 +6,7 @@ import Signup from '../views/Signup.vue'
 import Test from '../views/Test.vue'
 import NotFound from '../views/NotFound.vue'
 import PhotoList from '../views/PhotoList.vue'
+import Discover from '../views/Discover.vue'
 
 import Cookies from 'js-cookie'
 
@@ -24,6 +25,11 @@ const routes = [
     path: '/list',
     name: 'PhotoList',
     component: PhotoList
+  },
+  {
+    path: '/discover',
+    name: 'Discover',
+    component: Discover
   },
   {
     path: '/not-found',
