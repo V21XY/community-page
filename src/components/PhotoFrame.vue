@@ -2,8 +2,7 @@
   <div class="photo">
     <img :src="data.photo_list" /><a
       class="photo_link"
-      href="https://500px.com.cn/community/photo-details/00d329b77c0c40d381d73d4adabef040"
-      target="_blank"
+     @click="toDetail(data.did)"
     ></a>
     <div class="title">
       <p>{{ data.content }}</p>
@@ -38,7 +37,16 @@ export default {
     return {};
   },
   mounted: function () {},
-  methods: {},
+  methods: {
+    toDetail(id){
+      this.$router.push({
+        path:'/test',
+        query:{
+          id:id
+        }
+      })
+    }
+  },
 };
 </script>
 

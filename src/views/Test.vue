@@ -11,39 +11,37 @@
         <i class="iconfont icon-faxian1"></i>
       </div>
       <div class="photo_frame">
-        <img src="../assets/img/1.png" alt="" />
+        <img :src="data.photo_list" alt="" />
       </div>
     </div>
     <div class="right">
       <div class="photographer_info">
         <div class="avatar">
-          <img src="../assets/img/鱼.png" alt="" />
+          <img :src="data.avatar" alt=""/>
         </div>
         <div class="info">
-          <p>TheV21</p>
+          <p>{{data.username}}</p>
           <el-button type="primary" size="mini" plain>关注</el-button>
         </div>
       </div>
       <div class="actions">
         <div class="item">
           <i class="iconfont icon-faxian1"></i>
-          <p>210</p>
+          <p>{{data.likes}}</p>
         </div>
         <div class="item">
           <i class="iconfont icon-faxian1"> </i>
-          <p>210</p>
+          <p>{{data.forwards}}</p>
         </div>
         <div class="item">
           <i class="iconfont icon-faxian1"></i>
-          <p>21</p>
+          <p>{{data.comment}}</p>
         </div>
       </div>
       <div class="introduce">
-        <p>Introduce</p>
+        <p>介绍</p>
         <div class="content">
-          Our generation is different from those who raised us... Lack of
-          comprehension as to what we prefer has been an issue between family...
-          Thoughts is all we have...
+         {{data.content}}
         </div>
       </div>
       <div class="detail">
@@ -58,22 +56,40 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Test",
   data: function() {
-    return {};
+    return {
+    id:'',
+    data:{}
+    };
   },
-  mounted: function() {},
-  methods: {},
+  created(){
+     this.id=this.$route.query.id
+     console.log(this.id)
+  },
+    mounted: function() {
+    axios.get(`/api/dynamicDetail`,{
+      params:{
+        id:this.id
+      }
+    }).then((response) => {
+      this.data=response.data[0]
+    });
+  },
+  methods: {
+  },
 };
 </script>
 
 <style scoped lang="scss">
 .detail {
-  font-size: 1.2rem;
+  font-size: 1.1em;
+  color: rgb(73, 73, 73);
+  font-weight: bold;
   letter-spacing: 1px;
   height: 60px;
-  // background-color: blue;
   width: 100%;
   display: flex;
   align-items: center;
@@ -92,10 +108,16 @@ export default {
 .photo_frame {
   position: absolute;
   top: 0;
-  left: 15%;
-  width: 70%;
-  padding: 131px 340px;
-  //  background-color: yellow;
+  left: 20%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  // background-color: aqua;
+}
+.photo_frame>img{
+  width:100%
 }
 
 .full_screen .iconfont {

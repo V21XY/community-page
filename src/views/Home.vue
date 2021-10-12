@@ -43,7 +43,7 @@
         <i class="iconfont icon-faxian1"></i>
         <p>发现</p>
         <p>他人镜头下的美丽</p>
-        <a href="#"><el-button>发现美图</el-button></a>
+        <a href="/discover"><el-button>发现美图</el-button></a>
       </div>
 
       <div class="discover-nav-item">
