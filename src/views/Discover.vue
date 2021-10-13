@@ -51,12 +51,26 @@ export default {
   },
   methods: {
     to(){
-    axios.get("/api/dynamicTime").then((response) => {
+     this.$router.push({
+        path:'/discover',
+        query:{
+          type:"new"
+        }
+      })
+      console.log(this.$route.query.type)
+        axios.get("/api/dynamic").then((response) => {
       this.photo = response.data;
     });
     },
     back(){
-       axios.get("/api/dynamic").then((response) => {
+    this.$router.push({
+        path:'/discover',
+        query:{
+          type:"hot"
+        }
+      })
+       console.log(this.$route.query.type)
+         axios.get("/api/dynamicTime").then((response) => {
       this.photo = response.data;
     });
     }
