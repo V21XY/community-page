@@ -3,8 +3,8 @@
  <UnLoginHeader v-if="id == ''"></UnLoginHeader>
     <LoginHeader v-else></LoginHeader>
     <div class="navTab">
-<el-button @click="back()">热门</el-button>
-    <el-button @click="to()">最新</el-button>
+<el-button @click="Tohot()">热门</el-button>
+    <el-button @click="Tonew()">最新</el-button>
     </div>
   <div class="section">
     <div v-for="img,index in photo" :key="index">
@@ -50,31 +50,37 @@ export default {
      })
   },
   methods: {
-    to(){
+    Tonew(){
      this.$router.push({
         path:'/discover',
         query:{
           type:"new"
         }
       })
-      console.log(this.$route.query.type)
-        axios.get("/api/dynamic").then((response) => {
-      this.photo = response.data;
+       axios.get(`/api/dynamic`,{
+      params:{
+       type:this.$route.query.type
+      }
+    }).then((response) => {
+     this.photo = response.data;
     });
     },
-    back(){
-    this.$router.push({
+   Tohot(){
+   this.$router.push({
         path:'/discover',
         query:{
           type:"hot"
         }
       })
-       console.log(this.$route.query.type)
-         axios.get("/api/dynamicTime").then((response) => {
-      this.photo = response.data;
+       axios.get(`/api/dynamic`,{
+      params:{
+       type:this.$route.query.type
+      }
+    }).then((response) => {
+     this.photo = response.data;
     });
     }
-  },
+    }
 };
 </script>
 

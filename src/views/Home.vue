@@ -88,7 +88,7 @@
       <div class="content-photo">
         <h1>与优秀摄影师共驻，交流学习成长</h1>
         <div class="photo" >
-          <div class="photo-img-item"  v-for="(item) in hotList" :key="item.id">
+          <div class="photo-img-item"  v-for="(item) in hotList" :key="item.id"  @click="ToUserDetail(item.id)">
             <el-avatar
               class="avatar"
               :src="item.avatar"
@@ -178,7 +178,16 @@ export default {
       });
     });
   },
-  methods: {},
+  methods: {
+    ToUserDetail(id){
+       this.$router.push({
+        path:'/test',
+        query:{
+          id:id
+        }
+      })
+    }
+  },
 };
 </script>
 
@@ -196,6 +205,7 @@ h1 {
 // .content {
 //   background-color: #f5f5f5;
 // }
+
 
 .content-photo {
   background-color: #f5f5f5;

@@ -7,7 +7,7 @@ import Test from '../views/Test.vue'
 import NotFound from '../views/NotFound.vue'
 import PhotoList from '../views/PhotoList.vue'
 import Discover from '../views/Discover.vue'
-
+import PhotoDetail from '../views/PhotoDetail.vue'
 import Cookies from 'js-cookie'
 
 Vue.use(VueRouter)
@@ -20,6 +20,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/photodetail',
+    name: 'PhotoDetail',
+    component: PhotoDetail
   },
   {
     path: '/list',

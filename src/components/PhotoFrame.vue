@@ -40,7 +40,7 @@ export default {
   methods: {
     toDetail(id){
       this.$router.push({
-        path:'/test',
+        path:'/photodetail',
         query:{
           id:id
         }
