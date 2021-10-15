@@ -68,6 +68,7 @@ export default {
       Cookies.remove("id");
       location.reload();
     },
+    
   },
   mounted() {
     this.getUserInfo();

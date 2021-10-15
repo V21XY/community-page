@@ -9,6 +9,7 @@ import PhotoList from '../views/PhotoList.vue'
 import Discover from '../views/Discover.vue'
 import PhotoDetail from '../views/PhotoDetail.vue'
 import Cookies from 'js-cookie'
+import UserInfo from '../views/UserInfo.vue'
 
 Vue.use(VueRouter)
 function getToken() {
@@ -20,6 +21,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/UserInfo',
+    name: 'UserInfo',
+    component: UserInfo
   },
   {
     path: '/photodetail',
@@ -73,12 +79,21 @@ const router = new VueRouter({
   routes
 })
 
+// 跳转后返回顶部
+router.afterEach((to,from,next) => {
+  if(to.path==='/test'){
+    window.scrollTo(0,300);
+  }
+})
+
+
 const whiteList = ['/', '/signup','/login','/test']
 
 router.beforeEach((to, from, next) => {
   window.document.title = '摄影社区网站';
   next();
 });
+
 
 
 router.beforeEach(async (to, from, next) => {
@@ -95,6 +110,8 @@ router.beforeEach(async (to, from, next) => {
     // 最后，如果没有权限，则重定向回登录页
     next('/login')
   }
-})
+});
+
+
 
 export default router

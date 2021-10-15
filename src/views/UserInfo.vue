@@ -51,7 +51,7 @@ import axios from "axios";
 import LoginHeader from "../components/LoginHeader.vue";
 
 export default {
-  name: "Test",
+  name: "UserInfo",
 
   data: function() {
     return {

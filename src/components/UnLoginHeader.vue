@@ -8,7 +8,6 @@
         <a href="about"><li>关于500Px</li></a>
       </ul>
     </div>
-
     <div class="right">
       <el-form>
         <el-input

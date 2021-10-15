@@ -21,8 +21,8 @@
       </div>
     </el-backtop>
 
-    <UnLoginHeader v-if="id == ''"></UnLoginHeader>
-    <LoginHeader v-else></LoginHeader>
+    <UnLoginHeader v-if="id == ''" ></UnLoginHeader>
+    <LoginHeader v-else ></LoginHeader>
 
     <div class="content-img">
       <el-carousel arrow="never" indicator-position="none" height="560px">
@@ -201,10 +201,6 @@ h1 {
   padding-top: 50px;
   text-align: center;
 }
-
-// .content {
-//   background-color: #f5f5f5;
-// }
 
 
 .content-photo {
