@@ -82,6 +82,7 @@ export default {
 
   methods: {
     submit:function(){
+      console.log("登陆开始")
       axios.post('/api/login', {
           username: this.username,
           password: this.password,
@@ -94,6 +95,7 @@ export default {
         }).catch((err)=>{
           console.log(err)
         })
+          console.log("登陆结束")
     },
   },
 };

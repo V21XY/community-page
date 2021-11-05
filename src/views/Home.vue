@@ -181,10 +181,10 @@ export default {
   methods: {
     ToUserDetail(id){
        this.$router.push({
-        path:'/test',
-        query:{
-          id:id
-        }
+        path:`/test/${id}`,
+        // query:{
+        //   id:id
+        // }
       })
     }
   },

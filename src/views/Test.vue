@@ -38,11 +38,13 @@
           @select="handleSelect"
           router="true"
         >
-          <el-menu-item index="1" :route="zuopin">作品</el-menu-item>
-          <el-menu-item index="2" :route="tuwen">图文</el-menu-item>
-          <el-menu-item index="3" :route="jianjie">简介</el-menu-item>
+          <el-menu-item index="1" @click="change('zuopin')">作品</el-menu-item>
+          <el-menu-item index="2" @click="change('tuwen')">图文</el-menu-item>
+          <el-menu-item index="3" @click="change('jianjie')">简介</el-menu-item>
         </el-menu>
+       
       </div>
+       {{this.id}}
   </div>
 </template>
 
@@ -52,7 +54,6 @@ import LoginHeader from "../components/LoginHeader.vue";
 
 export default {
   name: "Test",
-
   data: function() {
     return {
       ratio: 0.05,
@@ -61,29 +62,12 @@ export default {
       id: "",
       activeIndex: "1",
       data: {},
-      zuopin: {
-        path: "/test",
-        query: {
-          id: 1,
-        },
-      },
-      tuwen: {
-        path: "/test",
-        query: {
-          id: 2,
-        },
-      },
-      jianjie: {
-        path: "/test",
-        query: {
-          id: 3,
-        },
-      },
+     
     };
   },
   components: { LoginHeader },
   created() {
-    this.id = this.$route.query.id;
+    this.id = this.$route.params.id;
     console.log(this.id);
   },
 
@@ -106,6 +90,14 @@ export default {
     };
   },
   methods: {
+    change(e){
+ this.$router.push({
+        path:`/test/${this.id}`,
+        query:{
+          set:e
+        }
+      })
+    },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
