@@ -21,8 +21,8 @@
       </div>
     </el-backtop>
 
-    <UnLoginHeader v-if="id == ''" ></UnLoginHeader>
-    <LoginHeader v-else ></LoginHeader>
+    <UnLoginHeader v-if="id == ''"></UnLoginHeader>
+    <LoginHeader v-else></LoginHeader>
 
     <div class="content-img">
       <el-carousel arrow="never" indicator-position="none" height="560px">
@@ -68,7 +68,7 @@
       </div>
     </div>
     <div class="content">
-      <div class="content-discover" style="padding:0 183px">
+      <div class="content-discover" style="padding: 0 183px">
         <h1>发现精彩图像 尽在国际化摄影社区</h1>
         <el-row>
           <el-col :span="8" v-for="o in photo" :key="o">
@@ -80,34 +80,32 @@
               "
             >
               <PhotoFrame :data="o"></PhotoFrame>
-             
             </div>
           </el-col>
         </el-row>
       </div>
       <div class="content-photo">
         <h1>与优秀摄影师共驻，交流学习成长</h1>
-        <div class="photo" >
-          <div class="photo-img-item"  v-for="(item) in hotList" :key="item.id"  @click="ToUserDetail(item.id)">
-            <el-avatar
-              class="avatar"
-              :src="item.avatar"
-            ></el-avatar>
-            <p>{{item.username}}</p>
-            <p>粉丝 ：{{item.fans}}个</p>
+        <div class="photo">
+          <div
+            class="photo-img-item"
+            v-for="item in hotList"
+            :key="item.id"
+            @click="ToUserDetail(item.id)"
+          >
+            <el-avatar class="avatar" :src="item.avatar"></el-avatar>
+            <p>{{ item.username }}</p>
+            <p>粉丝 ：{{ item.fans }}个</p>
           </div>
         </div>
       </div>
       <div class="content-model">
         <h1>通过拍摄，展示你的独特魅力</h1>
         <div class="photo">
-          <div class="photo-img-item"  v-for="(item) in hotList" :key="item.id">
-            <el-avatar
-              class="avatar"
-              :src="item.avatar"
-            ></el-avatar>
-            <p>{{item.username}}</p>
-            <p>粉丝 ：{{item.fans}}个</p>
+          <div class="photo-img-item" v-for="item in hotList" :key="item.id">
+            <el-avatar class="avatar" :src="item.avatar"></el-avatar>
+            <p>{{ item.username }}</p>
+            <p>粉丝 ：{{ item.fans }}个</p>
           </div>
         </div>
       </div>
@@ -125,7 +123,6 @@
             href="https://u.wechat.com/EGeLxT6XKPVgLHEbDvdpOpI"
             style="align-self: center"
           >
-
           </a>
         </div>
       </div>
@@ -154,7 +151,7 @@ export default {
         "https://img.zcool.cn/community/01309360caa84211013f47205c1c48.jpg@1380w",
       ],
       photo: [],
-      hotList:[]
+      hotList: [],
     };
   },
   components: {
@@ -172,21 +169,21 @@ export default {
         this.photo = response.data;
         console.log("图片列表", this.photo);
       });
-       axios.get("/api/hotList").then((response) => {
-         this.hotList=response.data
+      axios.get("/api/hotList").then((response) => {
+        this.hotList = response.data;
         console.log("热门列表", response.data);
       });
     });
   },
   methods: {
-    ToUserDetail(id){
-       this.$router.push({
-        path:`/test/${id}`,
+    ToUserDetail(id) {
+      this.$router.push({
+        path: `/test/${id}`,
         // query:{
         //   id:id
         // }
-      })
-    }
+      });
+    },
   },
 };
 </script>
@@ -201,7 +198,6 @@ h1 {
   padding-top: 50px;
   text-align: center;
 }
-
 
 .content-photo {
   background-color: #f5f5f5;
@@ -226,7 +222,8 @@ h1 {
 
 .content-about .introduce :nth-child(2) {
   font-size: 18px;
-  text-align: left;line-height: 30px;
+  text-align: left;
+  line-height: 30px;
 }
 .content-about {
   background-color: #f5f5f5;

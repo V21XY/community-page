@@ -10,6 +10,9 @@ import Discover from '../views/Discover.vue'
 import PhotoDetail from '../views/PhotoDetail.vue'
 import Cookies from 'js-cookie'
 import UserInfo from '../views/UserInfo.vue'
+import jianjie from '../components/jianjie.vue'
+import tuwen from '../components/tuwen.vue'
+import zuopin from '../components/zuopin.vue'
 
 Vue.use(VueRouter)
 function getToken() {
@@ -50,7 +53,38 @@ const routes = [
   {
     path: '/test/:id',
     name: 'Test',
-    component: Test
+    component: Test,
+    children: [
+      {
+        path: '',
+        component:zuopin
+      },
+      {
+        path: 'jianjie',
+        component:jianjie
+      },
+      {
+        path: 'tuwen',
+        component:tuwen
+      },
+      {
+        path: 'zuopin',
+        component:zuopin
+      },
+    ]
+    //   {
+    //     // 当 /user/:id/profile 匹配成功，
+    //     // UserProfile 会被渲染在 User 的 <router-view> 中
+    //     path: 'introduction',
+    //     component:  Introduction
+    //   },
+    //   {
+    //     // 当 /user/:id/posts 匹配成功
+    //     // UserPosts 会被渲染在 User 的 <router-view> 中
+    //     path: 'imgText',
+    //     component:ImageText
+    //   }
+    // ]
   },
   {
     path: '/login',
@@ -62,7 +96,8 @@ const routes = [
     name: 'Signup',
     component:Signup
   },
-  { path: '*', redirect: '/not-found', hidden: true }
+  // { path: '*', redirect: '/not-found', hidden: true }
+
   // {
   //   path: '/about',
   //   name: 'About',

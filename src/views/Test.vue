@@ -22,39 +22,37 @@
           {{ data.address }}
         </div>
         <div class="info">粉丝：{{ data.fans }}</div>
-        <div class="info" v-if="data.follows == null">
-          关注：0
-        </div>
+        <div class="info" v-if="data.follows == null">关注：0</div>
         <div class="info" v-else>关注：{{ data.follows }}</div>
       </div>
     </div>
 
     <div class="tabNav">
-        <el-menu
-          :default-active="activeIndex"
-          active-text-color="#0099E5"
-          class="el-menu-demo"
-          mode="horizontal"
-          @select="handleSelect"
-          router="true"
-        >
-          <el-menu-item index="1" @click="change('zuopin')">作品</el-menu-item>
-          <el-menu-item index="2" @click="change('tuwen')">图文</el-menu-item>
-          <el-menu-item index="3" @click="change('jianjie')">简介</el-menu-item>
-        </el-menu>
-       
-      </div>
-       {{this.id}}
+      <el-menu
+        :default-active="activeIndex"
+        active-text-color="#0099E5"
+        class="el-menu-demo"
+        mode="horizontal"
+        @select="handleSelect"
+      >
+        <el-menu-item index="1">作品</el-menu-item>
+        <el-menu-item index="2">图文</el-menu-item>
+        <el-menu-item index="3">简介</el-menu-item>
+      </el-menu>
+    </div>
+    <div v-if="key == 1">这是图文的时候才会显示</div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import LoginHeader from "../components/LoginHeader.vue";
-
+import jianjie from "../components/jianjie.vue";
+import tuwen from "../components/tuwen.vue";
+import zuopin from "../components/zuopin.vue";
 export default {
   name: "Test",
-  data: function() {
+  data: function () {
     return {
       ratio: 0.05,
       positionX: "100%",
@@ -62,10 +60,16 @@ export default {
       id: "",
       activeIndex: "1",
       data: {},
-     
+      set: "",
+      key: 1,
     };
   },
-  components: { LoginHeader },
+  components: {
+    LoginHeader,
+    tuwen,
+    zuopin,
+    jianjie,
+  },
   created() {
     this.id = this.$route.params.id;
     console.log(this.id);
@@ -90,16 +94,9 @@ export default {
     };
   },
   methods: {
-    change(e){
- this.$router.push({
-        path:`/test/${this.id}`,
-        query:{
-          set:e
-        }
-      })
-    },
     handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+      this.key = key;
+      console.log("当前key的值", key);
     },
   },
 };

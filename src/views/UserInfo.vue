@@ -22,38 +22,37 @@
           {{ data.address }}
         </div>
         <div class="info">粉丝：{{ data.fans }}</div>
-        <div class="info" v-if="data.follows == null">
-          关注：0
-        </div>
+        <div class="info" v-if="data.follows == null">关注：0</div>
         <div class="info" v-else>关注：{{ data.follows }}</div>
       </div>
     </div>
 
     <div class="tabNav">
-        <el-menu
-          :default-active="activeIndex"
-          active-text-color="#0099E5"
-          class="el-menu-demo"
-          mode="horizontal"
-          @select="handleSelect"
-          router="true"
-        >
-          <el-menu-item index="1" :route="zuopin">作品</el-menu-item>
-          <el-menu-item index="2" :route="tuwen">图文</el-menu-item>
-          <el-menu-item index="3" :route="jianjie">简介</el-menu-item>
-        </el-menu>
-      </div>
+      <el-menu
+        :default-active="activeIndex"
+        active-text-color="#0099E5"
+        class="el-menu-demo"
+        mode="horizontal"
+        @select="handleSelect"
+      >
+        <el-menu-item index="1">作品</el-menu-item>
+        <el-menu-item index="2">图文</el-menu-item>
+        <el-menu-item index="3">简介</el-menu-item>
+      </el-menu>
+    </div>
+    <div v-if="key === 1">这是图文的时候才会显示</div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import LoginHeader from "../components/LoginHeader.vue";
-
+import jianjie from "../components/jianjie.vue";
+import tuwen from "../components/tuwen.vue";
+import zuopin from "../components/zuopin.vue";
 export default {
-  name: "UserInfo",
-
-  data: function() {
+  name: "Test",
+  data: function () {
     return {
       ratio: 0.05,
       positionX: "100%",
@@ -61,29 +60,18 @@ export default {
       id: "",
       activeIndex: "1",
       data: {},
-      zuopin: {
-        path: "/test",
-        query: {
-          id: 1,
-        },
-      },
-      tuwen: {
-        path: "/test",
-        query: {
-          id: 2,
-        },
-      },
-      jianjie: {
-        path: "/test",
-        query: {
-          id: 3,
-        },
-      },
+      set: "",
+      key: 0,
     };
   },
-  components: { LoginHeader },
+  components: {
+    LoginHeader,
+    tuwen,
+    zuopin,
+    jianjie,
+  },
   created() {
-    this.id = this.$route.query.id;
+    this.id = this.$route.params.id;
     console.log(this.id);
   },
 
@@ -107,6 +95,7 @@ export default {
   },
   methods: {
     handleSelect(key, keyPath) {
+      this.key = key;
       console.log(key, keyPath);
     },
   },
