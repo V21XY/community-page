@@ -46,20 +46,20 @@ import "@/assets/css/iconfont.css";
 import "@/assets/css/style.css";
 
 import axios from "axios";
-import jsCookie from 'js-cookie'
+import jsCookie from "js-cookie";
 
 export default {
   name: "Login",
-  
-  data: function() {
+
+  data: function () {
     return {
       username: "",
       password: "",
     };
   },
   //在挂载完成时调用js文件控制样式
-  mounted: function() {
-    this.$nextTick(function() {
+  mounted: function () {
+    this.$nextTick(function () {
       const inputs = document.querySelectorAll(".input");
 
       function focusFunction() {
@@ -81,21 +81,25 @@ export default {
   },
 
   methods: {
-    submit:function(){
-      console.log("登陆开始")
-      axios.post('/api/login', {
+    submit: function () {
+      console.log("登陆开始");
+      axios
+        .post("/api/login", {
           username: this.username,
           password: this.password,
-        }).then((res)=>{
-          if(res.data.flag){
-            location.href="../"
-          }else{
-            alert(res.data.msg)
-          }
-        }).catch((err)=>{
-          console.log(err)
         })
-          console.log("登陆结束")
+        .then((res) => {
+          console.log(res);
+          if (res.data.flag) {
+            location.href = "../";
+          } else {
+            alert(res.data.msg);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      console.log("登陆结束");
     },
   },
 };

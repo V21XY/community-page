@@ -1,17 +1,48 @@
 <template>
   <div class="home">
     <LoginHeader></LoginHeader>
+
     <div
       class="bgimg"
       id="pic1"
+      @click="bgupload"
       v-bind:style="{
         'background-position-x': positionX,
         'background-position-y': positionY1 + 'px',
         'background-image': `url(${data.bgimg})`,
       }"
-    ></div>
+    >
+      <el-upload
+        class="bgupload"
+        action
+        :data="data"
+        :show-file-list="show"
+        ref="bgupload"
+        :http-request="bgupLoad"
+        :before-upload="beforeAvatarUpload"
+      >
+        <el-button
+          type="info"
+          plain
+          size="small"
+          style="opacity: 0.8; margin: 20px"
+          >更换背景图</el-button
+        >
+      </el-upload>
+    </div>
+
     <div class="content">
-      <img :src="data.avatar" alt="" />
+      <el-upload
+        class="avatar-uploader"
+        action
+        :data="data"
+        :show-file-list="show"
+        ref="upload"
+        :http-request="upLoad"
+        :before-upload="beforeAvatarUpload"
+      >
+        <img :src="data.avatar" alt="" class="img" />
+      </el-upload>
       <div class="name">
         <h1>{{ data.username }}</h1>
       </div>
@@ -21,6 +52,7 @@
         <div class="info">
           {{ data.address }}
         </div>
+        <div class="info" v-if="data.fans == null">粉丝：0</div>
         <div class="info">粉丝：{{ data.fans }}</div>
         <div class="info" v-if="data.follows == null">关注：0</div>
         <div class="info" v-else>关注：{{ data.follows }}</div>
@@ -36,11 +68,13 @@
         @select="handleSelect"
       >
         <el-menu-item index="1">作品</el-menu-item>
-        <el-menu-item index="2">图文</el-menu-item>
+        <el-menu-item index="2">动态/约拍</el-menu-item>
         <el-menu-item index="3">简介</el-menu-item>
       </el-menu>
     </div>
-    <div v-if="key == 1">这是图文的时候才会显示</div>
+    <zuopin v-if="key == 1" :id="id"></zuopin>
+    <tuwen v-if="key == 2" :id="id"></tuwen>
+    <jianjie v-if="key == 3" :id="id"></jianjie>
   </div>
 </template>
 
@@ -57,6 +91,7 @@ export default {
       ratio: 0.05,
       positionX: "100%",
       positionY1: 0,
+      show: false,
       id: "",
       activeIndex: "1",
       data: {},
@@ -98,6 +133,33 @@ export default {
       this.key = key;
       console.log("当前key的值", key);
     },
+    bgupload() {
+      this.$refs.bgupload.submit();
+    },
+    // 自定义上传图片
+    upLoad(file) {
+      const formData = new FormData();
+      formData.append("file", file.file);
+      axios.post(`/api/uploadAvatar`, formData).then((res) => {
+        // console.log(res);
+        this.data.avatar = res.data.avatar;
+      });
+    },
+    bgupLoad(file) {
+      const formData = new FormData();
+      formData.append("file", file.file);
+      axios.post(`/api/BGupload`, formData).then((res) => {
+        let img = res.data.bgimg;
+        this.data.bgimg = img;
+      });
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg" || "image/png";
+      if (!isJPG) {
+        this.$message.error("只能上传图片!");
+      }
+      return isJPG;
+    },
   },
 };
 </script>
@@ -114,6 +176,7 @@ export default {
   position: relative;
   width: 100%;
   height: 750px;
+  z-index: 50;
   background-attachment: fixed;
   background-position: center 0;
   background-repeat: no-repeat;
@@ -125,6 +188,11 @@ export default {
   font-weight: 400;
   color: #525558;
   margin: 15px 0;
+}
+.bgupload {
+  /* background-color: antiquewhite; */
+  width: 100%;
+  height: 100%;
 }
 
 .introduce {
@@ -162,8 +230,10 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-
-.content img {
+.avatar-uploader {
+  z-index: 88;
+}
+.content .avatar-uploader img {
   height: 100px;
   width: 100px;
   border-radius: 50%;

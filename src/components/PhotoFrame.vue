@@ -1,8 +1,8 @@
 <template>
   <div class="photo">
-    <img :src="data.photo_list" /><a
+    <img :src="data.photo_list[0]" /><a
       class="photo_link"
-     @click="toDetail(data.did)"
+      @click="toDetail(data.did)"
     ></a>
     <div class="title">
       <p>{{ data.content }}</p>
@@ -10,17 +10,18 @@
     <div class="bottom">
       <div class="footer">
         <div class="info">
-          <img :src="data.avatar" style="width: 30px; height: 30px" alt="" />
+          <img
+            :src="data.avatar"
+            @click="toUser(data.id)"
+            style="width: 30px; height: 30px"
+            alt=""
+          />
           <div class="name">{{ data.username }}</div>
-          <a
-            class="title_link"
-            href="https://www.hao123.com/"
-            target="_blank"
-          ></a>
+          <a class="title_link" @click="toUser(data.id)" target="_blank"></a>
         </div>
         <div class="action">
-          <i class="iconfont icon-guanyu1"></i>
-          <i class="iconfont icon-faxian1"></i>
+          <i class="iconfont icon-shoucang1"></i>
+          <!-- <i class="iconfont icon-faxian"></i> -->
         </div>
       </div>
     </div>
@@ -38,14 +39,22 @@ export default {
   },
   mounted: function () {},
   methods: {
-    toDetail(id){
+    toDetail(id) {
       this.$router.push({
-        path:'/photodetail',
-        query:{
-          id:id
-        }
-      })
-    }
+        path: "/photodetail",
+        query: {
+          id: id,
+        },
+      });
+    },
+    toUser(id) {
+      this.$router.push({
+        path: `/test/${id}`,
+      });
+    },
+  },
+  mounted() {
+    console.log("shuju", this.data);
   },
 };
 </script>

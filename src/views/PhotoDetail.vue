@@ -2,55 +2,68 @@
   <div class="main">
     <div class="left">
       <div class="full_screen">
+        <i class="iconfont icon-icon_close" @click="back"></i>
+      </div>
+      <!-- <div class="nav nav_left">
         <i class="iconfont icon-faxian1"></i>
       </div>
-      <div class="nav nav_left">
-        <i class="iconfont icon-faxian1"></i>
-      </div>
+
       <div class="nav nav_right">
         <i class="iconfont icon-faxian1"></i>
-      </div>
+      </div> -->
+
       <div class="photo_frame">
-        <img :src="data.photo_list" alt="" />
+        <img :src="data.photo_list[index]" alt="" />
+      </div>
+      <div class="list">
+        <div
+          class="img_list"
+          v-for="(img, index) in data.photo_list"
+          :key="index"
+          @click="changeImg(index)"
+        >
+          <img :src="img" alt="" width="160px" height="120px" />
+        </div>
       </div>
     </div>
+
     <div class="right">
       <div class="photographer_info">
         <div class="avatar">
-          <img :src="data.avatar" alt=""/>
+          <img :src="data.avatar" alt="" />
         </div>
         <div class="info">
-          <p>{{data.username}}</p>
+          <p>{{ data.username }}</p>
           <el-button type="primary" size="mini" plain>关注</el-button>
         </div>
       </div>
-      <div class="actions">
+      <!-- <div class="actions">
         <div class="item">
           <i class="iconfont icon-faxian1"></i>
-          <p>{{data.likes}}</p>
+          <p>{{ data.likes }}</p>
         </div>
         <div class="item">
           <i class="iconfont icon-faxian1"> </i>
-          <p>{{data.forwards}}</p>
+          <p>{{ data.forwards }}</p>
         </div>
         <div class="item">
           <i class="iconfont icon-faxian1"></i>
-          <p>{{data.comment}}</p>
+          <p>{{ data.comment }}</p>
         </div>
-      </div>
+      </div> -->
       <div class="introduce">
         <p>介绍</p>
         <div class="content">
-         {{data.content}}
+          {{ data.content }}
         </div>
       </div>
-      <div class="detail">
-        详细
+      <div class="detail" v-if="data.detail !== 'undefined'">
+        <p>详细</p>
+        <div class="content">
+          {{ data.detail }}
+        </div>
       </div>
-<div class="comment">
-
-</div>
-
+      <div class="comment"></div>
     </div>
   </div>
 </template>
@@ -59,43 +72,41 @@
 import axios from "axios";
 export default {
   name: "PhotoDetail",
-  data: function() {
+  data: function () {
     return {
-    id:'',
-    data:{}
+      id: "",
+      data: {},
+      index: 0,
     };
   },
-  created(){
-     this.id=this.$route.query.id
-     console.log(this.id)
+  created() {
+    this.id = this.$route.query.id;
+    console.log(this.id);
   },
-    mounted: function() {
-    axios.get(`/api/dynamicDetail`,{
-      params:{
-        id:this.id
-      }
-    }).then((response) => {
-      this.data=response.data[0]
-    });
+  mounted: function () {
+    axios
+      .get(`/api/dynamicDetail`, {
+        params: {
+          id: this.id,
+        },
+      })
+      .then((response) => {
+        this.data = response.data[0];
+      });
   },
   methods: {
+    back() {
+      this.$router.back();
+    },
+    changeImg(img) {
+      console.log(img);
+      this.index = img;
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
-.detail {
-  font-size: 1.1em;
-  color: rgb(73, 73, 73);
-  font-weight: bold;
-  letter-spacing: 1px;
-  height: 60px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding-left: 20px;
-}
-
 .full_screen {
   z-index: 15;
   position: absolute;
@@ -109,15 +120,15 @@ export default {
   position: absolute;
   top: 0;
   left: 20%;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 60%;
   // background-color: aqua;
 }
-.photo_frame>img{
-  width:100%
+.photo_frame > img {
+  width: 100%;
 }
 
 .full_screen .iconfont {
@@ -172,6 +183,30 @@ export default {
   letter-spacing: 0.5px;
 }
 
+.detail {
+  // background-color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+}
+
+.detail > p {
+  font-size: 1.1em;
+  color: rgb(73, 73, 73);
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.detail .content {
+  font-size: 14px;
+  line-height: 19px;
+  color: rgb(73, 73, 73);
+  letter-spacing: 0.5px;
+}
+
 .main {
   display: flex;
   height: 100vh;
@@ -197,7 +232,17 @@ export default {
   width: -webkit-calc(100% - 340px);
   position: relative;
 }
-
+.list {
+  position: absolute;
+  bottom: 0px;
+  left: 50px;
+  width: 100%;
+  display: flex;
+  // background-color: antiquewhite;
+}
+.img_list {
+  margin: 20px;
+}
 .actions {
   display: flex;
   align-items: center;

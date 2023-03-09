@@ -2,26 +2,30 @@
   <div id="header">
     <div class="left">
       <ul class="nav">
-        <a href="discover"><li>发现</li></a>
-        <a href="photoer"> <li>摄影师</li></a>
-        <a href="model"><li>模特</li></a>
-        <a href="about"><li>关于500Px</li></a>
+        <a href="http://localhost:8080"><li>首页</li></a>
+        <a href="http://localhost:8080/discover"><li>发现</li></a>
+        <a href="http://localhost:8080/action"><li>动态</li></a>
+        <a href="http://localhost:8080/shooting"><li>约拍</li></a>
+        <a href="http://localhost:8080/photoer"> <li>摄影师</li></a>
+        <a href="http://localhost:8080/model"><li>模特</li></a>
+        <a href="http://localhost:8080/about"><li>关于500Px</li></a>
       </ul>
     </div>
     <div class="right">
-      <el-form>
-        <el-input
-          style="width: 280px"
-          placeholder="请输入内容"
-          prefix-icon="el-icon-search"
-          v-model="search"
-        >
-        </el-input>
-      </el-form>
-      <a href="login"
+      <el-input
+        style="width: 280px"
+        placeholder="请输入内容"
+        prefix-icon="el-icon-search"
+        v-model="search"
+      >
+      </el-input>
+      <el-button plain round @click="searchKey(search)"
+        ><h4>搜索</h4></el-button
+      >
+      <a href="http://localhost:8080/login"
         ><el-button plain round><h4>登录</h4></el-button></a
       >
-      <a href="reg"
+      <a href="http://localhost:8080/signup"
         ><el-button plain round><h4>注册</h4></el-button></a
       >
     </div>
@@ -41,11 +45,17 @@ export default {
     };
   },
   methods: {
-   
+    searchKey(key) {
+      console.log(key);
+      this.$router.push({
+        path: `/search`,
+        query: {
+          key: key,
+        },
+      });
+    },
   },
-  mounted() {
-   
-  },
+  mounted() {},
 };
 </script>
 

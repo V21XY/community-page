@@ -11,8 +11,16 @@ import PhotoDetail from '../views/PhotoDetail.vue'
 import Cookies from 'js-cookie'
 import UserInfo from '../views/UserInfo.vue'
 import jianjie from '../components/jianjie.vue'
+import ModelF from '../components/Model.vue'
+import Model from '../views/Model.vue'
+import Photoer from '../views/Photoer.vue'
+import Shooting from '../components/Shooting.vue'
 import tuwen from '../components/tuwen.vue'
 import zuopin from '../components/zuopin.vue'
+import Action from '../components/Action.vue'
+import Search from '../views/Search.vue'
+import UploadPhoto from '../views/UploadPhoto'
+import About from '../views/About'
 
 Vue.use(VueRouter)
 function getToken() {
@@ -24,6 +32,51 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/Shooting',
+    name: 'Shooting',
+    component: Shooting
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search
+  },
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/action',
+    name: 'Action',
+    component: Action
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About
+  },
+  {
+    path: '/modelf',
+    name: 'ModelF',
+    component: ModelF
+  },
+  {
+    path: '/model',
+    name: 'Model',
+    component: Model
+  },
+  {
+    path: '/photoer',
+    name: 'Photoer',
+    component: Photoer
+  },
+  {
+    path: '/UploadPhoto',
+    name: 'UploadPhoto',
+    component: UploadPhoto
   },
   {
     path: '/UserInfo',
@@ -122,7 +175,7 @@ router.afterEach((to,from,next) => {
 })
 
 
-const whiteList = ['/', '/signup','/login','/test']
+const whiteList = ['/', '/signup','/login','/test','/search']
 
 router.beforeEach((to, from, next) => {
   window.document.title = '摄影社区网站';

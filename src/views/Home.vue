@@ -15,7 +15,7 @@
         "
       >
         <i
-          class="iconfont icon-guanyu1"
+          class="iconfont icon-guanyu"
           style="font-weight: bold; font-size: 28px"
         ></i>
       </div>
@@ -26,7 +26,7 @@
 
     <div class="content-img">
       <el-carousel arrow="never" indicator-position="none" height="560px">
-        <el-carousel-item v-for="item in img_url" :key="item">
+        <el-carousel-item v-for="(item, index) in img_url" :key="index">
           <transition name="el-zoom-in-center">
             <el-image
               fit="fill"
@@ -40,7 +40,7 @@
     </div>
     <div class="icon-nav">
       <div class="discover-nav-item">
-        <i class="iconfont icon-faxian1"></i>
+        <i class="iconfont icon-faxian"></i>
         <p>发现</p>
         <p>他人镜头下的美丽</p>
         <a href="/discover"><el-button>发现美图</el-button></a>
@@ -61,7 +61,7 @@
       </div>
 
       <div class="discover-nav-item">
-        <i class="iconfont icon-guanyu1"></i>
+        <i class="iconfont icon-guanyu"></i>
         <p>我们</p>
         <p>关于这个网站的“我们”</p>
         <a href="about"><el-button>认真阅读</el-button></a>
@@ -71,7 +71,7 @@
       <div class="content-discover" style="padding: 0 183px">
         <h1>发现精彩图像 尽在国际化摄影社区</h1>
         <el-row>
-          <el-col :span="8" v-for="o in photo" :key="o">
+          <el-col :span="8" v-for="(o, index) in photo" :key="index">
             <div
               style="
                 margin-bottom: 30px;
@@ -89,8 +89,8 @@
         <div class="photo">
           <div
             class="photo-img-item"
-            v-for="item in hotList"
-            :key="item.id"
+            v-for="(item, index) in hotList"
+            :key="index"
             @click="ToUserDetail(item.id)"
           >
             <el-avatar class="avatar" :src="item.avatar"></el-avatar>
@@ -102,7 +102,11 @@
       <div class="content-model">
         <h1>通过拍摄，展示你的独特魅力</h1>
         <div class="photo">
-          <div class="photo-img-item" v-for="item in hotList" :key="item.id">
+          <div
+            class="photo-img-item"
+            v-for="(item, index) in hotList"
+            :key="index"
+          >
             <el-avatar class="avatar" :src="item.avatar"></el-avatar>
             <p>{{ item.username }}</p>
             <p>粉丝 ：{{ item.fans }}个</p>
@@ -128,6 +132,66 @@
       </div>
     </div>
     <Footer></Footer>
+    <el-dialog title="对方用户信息" :visible.sync="user_dialog" width="30%">
+      <div style="font-size: 16px; margin-bottom: 20px">
+        <span>用户名：</span>{{ user.username }}
+      </div>
+      <div style="font-size: 16px"><span>电话号码：</span>{{ user.tel }}</div>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="dialogVisible = false"
+          >确 定</el-button
+        >
+      </span>
+    </el-dialog>
+
+    <el-dialog
+      title="约拍详情"
+      top="15%"
+      :visible.sync="dialogVisible"
+      width="40%"
+    >
+      <div
+        class="shoodetail"
+        v-for="(list, index) in shootingList"
+        :key="index"
+      >
+        <img :src="list.avatar" />
+        <div class="listcode">
+          <div style="color: #409eff">{{ list.username }}</div>
+          <div>向你发来约拍申请，关于</div>
+          <div
+            style="
+              color: #409eff;
+              width: 210px;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              overflow: hidden;
+            "
+          >
+            {{ list.content }}
+          </div>
+        </div>
+        <div class="button">
+          <el-button
+            type="primary"
+            size="mini"
+            @click="changeshooting(2, list.id, list.u_id)"
+            >接受</el-button
+          >
+          <el-button
+            type="warning"
+            size="mini"
+            @click="changeshooting(1, list.id, list.u_id)"
+            >拒绝</el-button
+          >
+        </div>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="dialogVisible = false"
+          >确 定</el-button
+        >
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -143,7 +207,10 @@ export default {
   data: function () {
     return {
       id: "",
+      dialogVisible: false,
       username: "周志贤",
+      shootingList: [],
+      user_dialog: false,
       img_url: [
         "https://img.zcool.cn/community/01cefd60cab82111013eaf70ae7581.png@1380w",
         "https://img.zcool.cn/community/01e1d760cbf80511013eaf70da4ddd.jpg@1380w",
@@ -152,6 +219,7 @@ export default {
       ],
       photo: [],
       hotList: [],
+      user: {},
     };
   },
   components: {
@@ -165,7 +233,7 @@ export default {
       axios.get("/api/userInfo").then((response) => {
         this.id = response.data[0].id;
       });
-      axios.get("/api/dynamic").then((response) => {
+      axios.get("/api/dynamicHost").then((response) => {
         this.photo = response.data;
         console.log("图片列表", this.photo);
       });
@@ -173,16 +241,71 @@ export default {
         this.hotList = response.data;
         console.log("热门列表", response.data);
       });
+      axios.get("/api/shootingList").then((res) => {
+        if (res.data[0].num) {
+          this.$confirm(
+            `你还有${res.data[0].num}个约拍订单未处理`,
+            "约拍订单",
+            {
+              confirmButtonText: "去处理",
+              cancelButtonText: "不再提醒",
+              callback: (action) => {
+                if (action === "confirm") {
+                  axios.get("/api/shooListDetail").then((res) => {
+                    this.dialogVisible = true;
+                    console.log(res);
+                    this.shootingList = res.data;
+                  });
+                } else {
+                  axios
+                    .post("/api/changeshooting", {
+                      type: 3,
+                    })
+                    .then((res) => {
+                      this.getActions();
+                    });
+                }
+              },
+            }
+          );
+        }
+      });
     });
   },
   methods: {
     ToUserDetail(id) {
       this.$router.push({
         path: `/test/${id}`,
-        // query:{
-        //   id:id
-        // }
       });
+    },
+    changeshooting(type, id, user_id) {
+      axios
+        .post("/api/changeshoo", {
+          type: type,
+          id: id,
+        })
+        .then((res) => {
+          if (res.data.flag) {
+            this.$message({
+              message: "恭喜你，约拍成功！",
+              type: "success",
+            });
+            this.dialogVisible = false;
+            axios
+              .post("/api/getUserInfo", {
+                id: user_id,
+              })
+              .then((res) => {
+                console.log(res.data[0]);
+                this.user = res.data[0];
+                this.user_dialog = true;
+              });
+          }
+
+          axios.get("/api/shooListDetail").then((res) => {
+            this.shootingList = res.data;
+          });
+        });
     },
   },
 };
@@ -198,7 +321,31 @@ h1 {
   padding-top: 50px;
   text-align: center;
 }
-
+.listcode {
+  display: flex;
+}
+.shoodetail {
+  background-color: rgb(235, 232, 232);
+  display: flex;
+  border-radius: 16px;
+  align-items: center;
+  padding: 4px 10px;
+  margin-bottom: 8px;
+  position: relative;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+.shoodetail .button {
+  position: absolute;
+  right: 10px;
+}
+.shoodetail > div {
+  margin-left: 20px;
+}
+.shoodetail > img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
 .content-photo {
   background-color: #f5f5f5;
 }

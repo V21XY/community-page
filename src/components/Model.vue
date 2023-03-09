@@ -1,6 +1,6 @@
 <template>
   <div class="photo">
-    <img :src="data.photo_list[0]" /><a
+    <img :src="data.bgimg" /><a
       class="photo_link"
       @click="toDetail(data.did)"
     ></a>
@@ -10,12 +10,17 @@
     <div class="bottom">
       <div class="footer">
         <div class="info">
+          <img
+            :src="data.avatar"
+            @click="toUser(data.id)"
+            style="width: 30px; height: 30px"
+            alt=""
+          />
           <div class="name">{{ data.username }}</div>
           <a class="title_link" @click="toUser(data.id)" target="_blank"></a>
         </div>
         <div class="action">
-          <i class="iconfont icon-shoucang1"></i>
-          <!-- <i class="iconfont icon-faxian"></i> -->
+          <el-button>关注</el-button>
         </div>
       </div>
     </div>
@@ -24,7 +29,7 @@
 
 <script>
 export default {
-  name: "Photo",
+  name: "PhotoFrame",
   props: {
     data: Object,
   },
@@ -53,9 +58,8 @@ export default {
 <style scoped lang="scss">
 .action .iconfont {
   margin-left: 15px;
-  font-size: 16px;
+  font-size: 20px;
   opacity: 0.8;
-  padding-bottom: 4px;
 }
 
 a {
@@ -70,20 +74,14 @@ a {
 
 .photo {
   top: 0px;
-  max-width: 500px;
-  // min-width: 300;
+  width: 520px;
   left: 0px;
   position: relative;
 }
 
 .photo img {
-  // position: relative;
-  // width: 100%;
-  // object-fit: cover;
-  height: 300px;
-  // object-fit: cover;
-  max-width: 100%;
-  min-width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .photo .photo_link {
@@ -144,15 +142,15 @@ a {
 }
 
 .info {
-  // position: absolute;
+  position: absolute;
   left: 20px;
   display: flex;
   align-items: center;
-  // opacity: 0;
-  // bottom: 0;
-  // -webkit-transition: all 0.2s;
-  // -moz-transition: all 0.2s;
-  // transition: all 0.2s;
+  opacity: 0;
+  bottom: 0;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
 }
 
 .info .title_link {
@@ -174,7 +172,7 @@ a {
   right: 20px;
   display: flex;
   align-items: center;
-  // opacity: 0;
+  opacity: 0;
   bottom: 0;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
